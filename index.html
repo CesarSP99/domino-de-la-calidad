@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Domino - Dream Team</title>
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Quicksand"
+    />
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+  <body>
+    <h1>Domino de Calidad - Dream Team</h1>
+
+    <!-- Fichas de domino -->
+
+    <div class="draggable">
+      <img src="img/f1.png" alt="" class="domino" id="f1" />
+    </div>
+    <div class="draggable">
+      <img src="img/f2.png" alt="" class="domino" id="f2" />
+    </div>
+    <div class="draggable">
+      <img src="img/f3.png" alt="" class="domino" id="f3" />
+    </div>
+    <div class="draggable">
+      <img src="img/f4.png" alt="" class="domino" id="f4" />
+    </div>
+    <div class="draggable">
+      <img src="img/f5.png" alt="" class="domino" id="f5" />
+    </div>
+    <div class="draggable">
+      <img src="img/f6.png" alt="" class="domino" id="f6" />
+    </div>
+    <div class="draggable">
+      <img src="img/f7.png" alt="" class="domino" id="f7" />
+    </div>
+    <div class="draggable">
+      <img src="img/f8.png" alt="" class="domino" id="f8" />
+    </div>
+    <div class="draggable">
+      <img src="img/f9.png" alt="" class="domino" id="f9" />
+    </div>
+    <div class="draggable">
+      <img src="img/f10.png" alt="" class="domino" id="f10" />
+    </div>
+    <div class="draggable">
+      <img src="img/f11.png" alt="" class="domino" id="f11" />
+    </div>
+    <div class="draggable">
+      <img src="img/f12.png" alt="" class="domino" id="f12" />
+    </div>
+    <div class="draggable">
+      <img src="img/f13.png" alt="" class="domino" id="f13" />
+    </div>
+    <div class="draggable">
+      <img src="img/f14.png" alt="" class="domino" id="f14" />
+    </div>
+    <div class="draggable">
+      <img src="img/f15.png" alt="" class="domino" id="f15" />
+    </div>
+    <div class="draggable">
+      <img src="img/f16.png" alt="" class="domino" id="f16" />
+    </div>
+    <div class="draggable">
+      <img src="img/f17.png" alt="" class="domino" id="f17" />
+    </div>
+    <div class="draggable">
+      <img src="img/f18.png" alt="" class="domino" id="f18" />
+    </div>
+    <div class="draggable">
+      <img src="img/f19.png" alt="" class="domino" id="f19" />
+    </div>
+    <div class="draggable">
+      <img src="img/f20.png" alt="" class="domino" id="f20" />
+    </div>
+    <div class="draggable">
+      <img src="img/f21.png" alt="" class="domino" id="f21" />
+    </div>
+    <div class="draggable">
+      <img src="img/f22.png" alt="" class="domino" id="f22" />
+    </div>
+    <div class="draggable">
+      <img src="img/f23.png" alt="" class="domino" id="f23" />
+    </div>
+    <div class="draggable">
+      <img src="img/f24.png" alt="" class="domino" id="f24" />
+    </div>
+    <div class="draggable">
+      <img src="img/f25.png" alt="" class="domino" id="f25" />
+    </div>
+    <div class="draggable">
+      <img src="img/f26.png" alt="" class="domino" id="f26" />
+    </div>
+    <div class="draggable">
+      <img src="img/f27.png" alt="" class="domino" id="f27" />
+    </div>
+    <div class="draggable">
+      <img src="img/f28.png" alt="" class="domino" id="f28" />
+    </div>
+    <!-- Codigo para arrastrar -->
+
+    <script type="module">
+      import interact from "https://cdn.interactjs.io/v1.10.11/interactjs/index.js";
+      interact(".draggable").draggable({
+        inertia: true,
+        modifiers: [
+          interact.modifiers.restrictRect({
+            restriction: "parent",
+            endOnly: true,
+          }),
+        ],
+        autoScroll: true,
+
+        listeners: {
+          move: dragMoveListener,
+          end(event) {},
+        },
+      });
+
+      function dragMoveListener(event) {
+        var target = event.target;
+        var x = (parseFloat(target.getAttribute("data-x")) || 0) + event.dx;
+        var y = (parseFloat(target.getAttribute("data-y")) || 0) + event.dy;
+        target.style.transform = "translate(" + x + "px, " + y + "px)";
+        target.setAttribute("data-x", x);
+        target.setAttribute("data-y", y);
+      }
+      window.dragMoveListener = dragMoveListener;
+      var fichas = document.getElementsByClassName("domino");
+      var rotaciones = new Map();
+      for (var i = 0; i < fichas.length; i++) {
+        rotaciones.set(fichas[i].id, 0);
+        fichas[i].addEventListener(
+          "contextmenu",
+          function (ev) {
+            ev.preventDefault();
+            rotaciones.set(ev.target.id, rotaciones.get(ev.target.id) + 90);
+            console.log(
+              ev.target.id.toString() +
+                ": " +
+                (rotaciones.get(ev.target.id) % 360)
+            );
+            ev.target.style.cssText +=
+              "transform:rotate(" +
+              (rotaciones.get(ev.target.id) % 360) +
+              "deg);";
+            return false;
+          },
+          false
+        );
+      }
+    </script>
+  </body>
+</html>

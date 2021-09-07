@@ -1,0 +1,28 @@
+.domino {
+  width: fit-content;
+  margin: 1rem 0 0 1rem;
+  touch-action: none;
+  user-select: none;
+  transform: translate(0px, 0px);
+}
+
+div {
+  width: fit-content;
+  touch-action: none;
+}
+
+h1{
+  font-family: Quicksand;
+  text-align: center;
+  font-size: 50px;
+  font-weight: bold;
+}
+
+html {
+  height: 100%;
+  background-color: lightgrey;
+}
+
+body {
+  min-height: 100%;
+}
